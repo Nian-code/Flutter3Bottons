@@ -1,7 +1,4 @@
-// ignore_for_file: prefer_const_constructors
-
-
-import 'dart:developer';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -16,42 +13,68 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage>{
 
-  int contador = 0;
   final textStyle = TextStyle(fontSize: 20);
+
+  int contador = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
     appBar: AppBar(
-      title: Text("Title in appbar"), 
-      centerTitle: true, 
-      elevation: 10, 
+      title: Text("Title in appbar"),
+      centerTitle: true,
+      elevation: 10,
     ),
     body:
     Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        // ignore: prefer_const_literals_to_create_immutables
         children: [
           Text(
             "Números de clicks:",
             style: textStyle),
           Text(
-            '$contador', 
+            '$contador',
             style: textStyle)],
           )
-        ), 
-        floatingActionButton:  
-              FloatingActionButton(
-                child:Icon(
-                  Icons.add,
-                ),
-                onPressed: () => {
-                  setState(() => contador++)
-                  }
-               ,),
-        floatingActionButtonLocation: 
-              FloatingActionButtonLocation.centerFloat
+        ),
+        floatingActionButton: _crearBotones()
     );
   }
+
+  Widget _crearBotones() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+            FloatingActionButton( 
+              child: Icon(Icons.exposure_zero ),
+              onPressed: _reset),
+          Row(
+            children: [  
+            FloatingActionButton( 
+              child: Icon(Icons.remove ),
+              onPressed: _sustraer ),
+            SizedBox(width: 10,),
+            FloatingActionButton( 
+              child: Icon(Icons.add ), 
+              onPressed: _agregar )
+          ],),
+        ],
+      );
+  }
+
+  void _agregar() {
+    setState(() => contador++ );
+  }
+
+  void _sustraer() {
+    if (contador != 0) {
+      setState(() => contador-- );  
+    }
+  }
+
+  void _reset() {
+    setState(() => contador = 0 );
+  }
+
 }
