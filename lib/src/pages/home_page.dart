@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage>{
   Widget build(BuildContext context) {
     return Scaffold(
     appBar: AppBar(
-      title: Text("Title in appbar"),
+      title: Text("Contador de clicks"),
       centerTitle: true,
       elevation: 10,
     ),
